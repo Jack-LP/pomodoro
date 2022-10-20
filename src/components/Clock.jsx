@@ -1,8 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { convertTime } from '../utilities/convertTime';
 
-const Clock = ({ isTiming, setIsTiming }) => {
-  const [timer, setTimer] = useState(10);
+const Clock = ({ isTiming, setIsTiming, timeFunc, timeSettings }) => {
+  let defaultTimer;
+  if (timeFunc === 'pomodoro') {
+    defaultTimer = timeSettings.pomodoro;
+  } else if (timeFunc === 'short') {
+    defaultTimer = timeSettings.short;
+  } else {
+    defaultTimer = timeSettings.long;
+  }
+
+  const [timer, setTimer] = useState(defaultTimer);
+
+  const updateTimeRemaining = () => {
+    if (!timer) {
+      setTimer(defaultTimer + 1);
+      setIsTiming(false);
+    }
+    setTimer((prev) => prev - 1);
+  };
 
   useEffect(() => {
     if (isTiming) {
@@ -13,14 +30,16 @@ const Clock = ({ isTiming, setIsTiming }) => {
     }
   }, [isTiming, setIsTiming, timer, setTimer]);
 
-  const updateTimeRemaining = () => {
-    if (!timer) {
-      setTimer(10);
-      setIsTiming(false);
+  useEffect(() => {
+    setIsTiming(false);
+    if (timeFunc === 'pomodoro') {
+      setTimer(timeSettings.pomodoro);
+    } else if (timeFunc === 'short') {
+      setTimer(timeSettings.short);
+    } else {
+      setTimer(timeSettings.long);
     }
-    console.log(timer);
-    setTimer((prev) => prev - 1);
-  };
+  }, [timeFunc, setTimer]);
 
   return (
     <div
