@@ -15,6 +15,7 @@ module.exports = {
         grape: '#d981f7',
         ice: '#6feff4',
         slate: '#d8e1ff',
+        chalk: '#eff1fa',
       },
     },
   },

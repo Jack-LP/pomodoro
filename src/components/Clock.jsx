@@ -46,7 +46,7 @@ const Clock = ({ isTiming, setIsTiming, timeFunc, timeSettings }) => {
       onClick={() => setIsTiming((prev) => !prev)}
       className='bg-midnight relative flex flex-col gap-8 w-[300px] h-[300px] rounded-full items-center justify-center shadowCustom cursor-pointer'
     >
-      <span className='text-8xl font-bold pointer-events-none text-slate'>
+      <span className='text-[85px] font-bold pointer-events-none text-slate'>
         {convertTime(timer)}
       </span>
       <button className='absolute bottom-14 text-lg font-semibold text-slate uppercase tracking-[8px]'>

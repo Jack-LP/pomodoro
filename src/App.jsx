@@ -14,18 +14,33 @@ const App = () => {
   const [timeFunc, setTimeFunc] = useState('pomodoro');
   const [isTiming, setIsTiming] = useState(false);
   const [timeSettings, setTimeSettings] = useState(defaultTimeSettings);
+  const [fontSettings, setFontSettings] = useState('font-kumbh');
+  const [colorSettings, setColorSettings] = useState('bg-fire');
 
   return (
-    <div className='bg-plum text-white h-screen w-screen font-kumbh flex flex-col items-center py-8 gap-8'>
+    <div
+      className={`bg-plum text-white h-screen w-screen ${fontSettings} flex flex-col items-center py-8 gap-8`}
+    >
       <Heading />
-      <Tabs timeFunc={timeFunc} setTimeFunc={setTimeFunc} />
+      <Tabs
+        timeFunc={timeFunc}
+        setTimeFunc={setTimeFunc}
+        colorSettings={colorSettings}
+      />
       <Clock
         isTiming={isTiming}
         setIsTiming={setIsTiming}
         timeFunc={timeFunc}
         timeSettings={timeSettings}
       />
-      <SettingsModal />
+      <SettingsModal
+        timeSettings={timeSettings}
+        setTimeSettings={setTimeSettings}
+        fontSettings={fontSettings}
+        setFontSettings={setFontSettings}
+        colorSettings={colorSettings}
+        setColorSettings={setColorSettings}
+      />
     </div>
   );
 };
