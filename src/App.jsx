@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Heading from './components/Heading';
 import Tabs from './components/Tabs';
 import Clock from './components/Clock';
+import SettingsModal from './components/SettingsModal';
 
 const defaultTimeSettings = {
   pomodoro: 1200,
@@ -24,6 +25,7 @@ const App = () => {
         timeFunc={timeFunc}
         timeSettings={timeSettings}
       />
+      <SettingsModal />
     </div>
   );
 };
