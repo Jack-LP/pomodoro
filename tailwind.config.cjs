@@ -14,6 +14,7 @@ module.exports = {
         fire: '#fc6e70',
         grape: '#d981f7',
         ice: '#6feff4',
+        slate: '#d8e1ff',
       },
     },
   },
