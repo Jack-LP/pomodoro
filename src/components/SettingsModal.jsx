@@ -30,7 +30,7 @@ const SettingsModal = ({
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className='flex flex-col bg-white text-midnight p-6 rounded-xl gap-6 z-30'
+          className='w-11/12 md:w-9/12 lg:w-1/2 xl:w-1/3 flex flex-col bg-white text-midnight p-6 rounded-xl gap-6 z-30'
         >
           <div className='flex justify-between items-center border-b-2 pb-4'>
             <h2 className='font-bold text-2xl'>Settings</h2>
@@ -38,26 +38,48 @@ const SettingsModal = ({
               <XMarkIcon className='h-6 w-6 text-midnight/50' />
             </button>
           </div>
-          <div className='flex flex-col gap-4 pb-6 border-b-2'>
+          <div className='flex flex-col items-center gap-4 pb-6 border-b-2'>
             <h3 className='font-semibold text-sm uppercase tracking-widest'>
               Time (Minutes)
             </h3>
-            <div className='flex gap-10'>
-              <div className='flex flex-col'>
-                <span>pomodoro</span>
-                Input
+            <div className='flex gap-10 flex-col md:flex-row md:justify-between w-full'>
+              <div className='flex md:flex-col md:items-start justify-between items-center md:w-full md:gap-2'>
+                <span className='font-semibold text-midnight/75'>pomodoro</span>
+                <input
+                  type='number'
+                  min='1'
+                  max='60'
+                  defaultValue={timeSettings.pomodoro / 60}
+                  className='bg-chalk rounded-lg p-2 max-w-[130px] font-semibold md:w-full'
+                />
               </div>
-              <div className='flex flex-col'>
-                <span>short break</span>
-                Input
+              <div className='flex md:flex-col md:items-start justify-between items-center md:w-full md:gap-2'>
+                <span className='font-semibold text-midnight/75'>
+                  short break
+                </span>
+                <input
+                  type='number'
+                  min='1'
+                  max='60'
+                  defaultValue={timeSettings.short / 60}
+                  className='bg-chalk rounded-lg p-2 max-w-[130px] font-semibold md:w-full'
+                />
               </div>
-              <div className='flex flex-col'>
-                <span>long break</span>
-                Input
+              <div className='flex md:flex-col md:items-start justify-between items-center md:w-full md:gap-2'>
+                <span className='font-semibold text-midnight/75'>
+                  long break
+                </span>
+                <input
+                  type='number'
+                  min='1'
+                  max='60'
+                  defaultValue={timeSettings.long / 60}
+                  className='bg-chalk rounded-lg p-2 max-w-[130px] font-semibold md:w-full'
+                />
               </div>
             </div>
           </div>
-          <div className='flex justify-between pb-6 border-b-2 items-center'>
+          <div className='flex flex-col md:flex-row gap-4 justify-between pb-6 border-b-2 items-center'>
             <h3 className='font-semibold text-sm uppercase tracking-widest'>
               Font
             </h3>
@@ -77,7 +99,7 @@ const SettingsModal = ({
               ))}
             </div>
           </div>
-          <div className='flex justify-between pb-6 items-center'>
+          <div className='flex flex-col md:flex-row gap-4 justify-between pb-6 items-center'>
             <h3 className='font-semibold text-sm uppercase tracking-widest'>
               Color
             </h3>

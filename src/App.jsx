@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Heading from './components/Heading';
 import Tabs from './components/Tabs';
 import Clock from './components/Clock';
@@ -14,8 +14,17 @@ const App = () => {
   const [timeFunc, setTimeFunc] = useState('pomodoro');
   const [isTiming, setIsTiming] = useState(false);
   const [timeSettings, setTimeSettings] = useState(defaultTimeSettings);
-  const [fontSettings, setFontSettings] = useState('font-kumbh');
-  const [colorSettings, setColorSettings] = useState('bg-fire');
+  const [fontSettings, setFontSettings] = useState(
+    localStorage.getItem('fontSettings') || 'font-kumbh'
+  );
+  const [colorSettings, setColorSettings] = useState(
+    localStorage.getItem('colorSettings') || 'bg-fire'
+  );
+
+  useEffect(() => {
+    localStorage.setItem('fontSettings', fontSettings);
+    localStorage.setItem('colorSettings', colorSettings);
+  }, [fontSettings, colorSettings]);
 
   return (
     <div
