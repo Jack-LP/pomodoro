@@ -8,6 +8,6 @@
   }
 }
 
-.shadowCustom {
-  box-shadow: 20px 20px 71px #15182d, -20px -20px 71px #272c53;
+.customShadow {
+  box-shadow: 35px 35px 70px #0f1120, -35px -35px 70px #2d3360;
 }

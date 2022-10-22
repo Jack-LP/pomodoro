@@ -45,7 +45,7 @@ const SettingsModal = ({
     <>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className='absolute bottom-10'
+        className='absolute bottom-10 hover:rotate-45 duration-300 ease-in-out'
       >
         <Cog6ToothIcon className='h-8 w-8 text-slate' />
       </button>

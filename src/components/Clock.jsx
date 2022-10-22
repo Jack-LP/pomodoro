@@ -42,17 +42,21 @@ const Clock = ({ isTiming, setIsTiming, timeFunc, timeSettings }) => {
   }, [timeFunc, setTimer, timeSettings]);
 
   return (
-    <div
-      onClick={() => setIsTiming((prev) => !prev)}
-      className='bg-midnight relative flex flex-col gap-8 w-[300px] h-[300px] rounded-full items-center justify-center shadowCustom cursor-pointer mt-14'
-    >
-      <span className='text-[85px] font-bold pointer-events-none text-slate'>
-        {convertTime(timer)}
-      </span>
-      <button className='absolute bottom-14 text-lg font-semibold text-slate uppercase tracking-[8px]'>
-        {isTiming ? 'pause' : 'start'}
-      </button>
-    </div>
+    <>
+      <div className='absolute top-[245px] bg-midnight  w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full customShadow' />
+      <div className='absolute top-[240px] bg-gradient-to-br from-[#14162a] to-[#292e56] w-[330px] h-[330px] md:w-[430px] md:h-[430px] rounded-full' />
+      <div
+        onClick={() => setIsTiming((prev) => !prev)}
+        className='bg-midnight relative flex flex-col gap-8 md:w-[400px] md:h-[400px] w-[300px] h-[300px] rounded-full items-center justify-center cursor-pointer mt-14'
+      >
+        <span className='text-[85px] md:text-[110px] font-bold pointer-events-none text-slate'>
+          {convertTime(timer)}
+        </span>
+        <button className='absolute bottom-14 text-lg md:text-2xl font-semibold text-slate uppercase tracking-[8px]'>
+          {isTiming ? 'pause' : 'start'}
+        </button>
+      </div>
+    </>
   );
 };
 
