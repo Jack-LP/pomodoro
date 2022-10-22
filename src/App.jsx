@@ -13,7 +13,9 @@ const defaultTimeSettings = {
 const App = () => {
   const [timeFunc, setTimeFunc] = useState('pomodoro');
   const [isTiming, setIsTiming] = useState(false);
-  const [timeSettings, setTimeSettings] = useState(defaultTimeSettings);
+  const [timeSettings, setTimeSettings] = useState(
+    JSON.parse(localStorage.getItem('timeSettings')) || defaultTimeSettings
+  );
   const [fontSettings, setFontSettings] = useState(
     localStorage.getItem('fontSettings') || 'font-kumbh'
   );
@@ -22,9 +24,10 @@ const App = () => {
   );
 
   useEffect(() => {
+    localStorage.setItem('timeSettings', JSON.stringify(timeSettings));
     localStorage.setItem('fontSettings', fontSettings);
     localStorage.setItem('colorSettings', colorSettings);
-  }, [fontSettings, colorSettings]);
+  }, [fontSettings, colorSettings, timeSettings]);
 
   return (
     <div

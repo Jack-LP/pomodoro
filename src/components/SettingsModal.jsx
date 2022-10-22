@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Cog6ToothIcon, XMarkIcon, CheckIcon } from '@heroicons/react/24/solid';
 
-const fontOptions = ['font-kumbh', 'font-roboto', 'font-space'];
-const colorOptions = ['bg-fire', 'bg-ice', 'bg-grape'];
-
 const SettingsModal = ({
   timeSettings,
   setTimeSettings,
@@ -13,6 +10,36 @@ const SettingsModal = ({
   setColorSettings,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const timeOptions = [
+    { name: 'pomodoro', value: timeSettings.pomodoro, objectKey: 'pomodoro' },
+    { name: 'short break', value: timeSettings.short, objectKey: 'short' },
+    { name: 'long break', value: timeSettings.long, objectKey: 'long' },
+  ];
+  const fontOptions = ['font-kumbh', 'font-roboto', 'font-space'];
+  const colorOptions = ['bg-fire', 'bg-ice', 'bg-grape'];
+
+  const handleChange = (e, item) => {
+    console.log(e);
+    if (e.target.value < 1) {
+      setTimeSettings((prev) => ({
+        ...prev,
+        [item]: 1 * 60,
+      }));
+      e.target.value = 1;
+    } else if (e.target.value > 60) {
+      setTimeSettings((prev) => ({
+        ...prev,
+        [item]: 60 * 60,
+      }));
+      e.target.value = 60;
+    } else {
+      setTimeSettings((prev) => ({
+        ...prev,
+        [item]: e.target.value * 60,
+      }));
+    }
+  };
 
   return (
     <>
@@ -43,40 +70,25 @@ const SettingsModal = ({
               Time (Minutes)
             </h3>
             <div className='flex gap-10 flex-col md:flex-row md:justify-between w-full'>
-              <div className='flex md:flex-col md:items-start justify-between items-center md:w-full md:gap-2'>
-                <span className='font-semibold text-midnight/75'>pomodoro</span>
-                <input
-                  type='number'
-                  min='1'
-                  max='60'
-                  defaultValue={timeSettings.pomodoro / 60}
-                  className='bg-chalk rounded-lg p-2 max-w-[130px] font-semibold md:w-full'
-                />
-              </div>
-              <div className='flex md:flex-col md:items-start justify-between items-center md:w-full md:gap-2'>
-                <span className='font-semibold text-midnight/75'>
-                  short break
-                </span>
-                <input
-                  type='number'
-                  min='1'
-                  max='60'
-                  defaultValue={timeSettings.short / 60}
-                  className='bg-chalk rounded-lg p-2 max-w-[130px] font-semibold md:w-full'
-                />
-              </div>
-              <div className='flex md:flex-col md:items-start justify-between items-center md:w-full md:gap-2'>
-                <span className='font-semibold text-midnight/75'>
-                  long break
-                </span>
-                <input
-                  type='number'
-                  min='1'
-                  max='60'
-                  defaultValue={timeSettings.long / 60}
-                  className='bg-chalk rounded-lg p-2 max-w-[130px] font-semibold md:w-full'
-                />
-              </div>
+              {timeOptions.map((item) => (
+                <div
+                  key={item.name}
+                  className='flex md:flex-col md:items-start justify-between items-center md:w-full md:gap-2'
+                >
+                  <span className='font-semibold text-midnight/75'>
+                    {item.name}
+                  </span>
+                  <input
+                    type='number'
+                    min='1'
+                    max='60'
+                    placeholder='1 - 60'
+                    defaultValue={item.value / 60}
+                    onChange={(e) => handleChange(e, item.objectKey)}
+                    className='bg-chalk rounded-lg p-2 w-1/3 max-w-[130px] font-semibold md:w-full'
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <div className='flex flex-col md:flex-row gap-4 justify-between pb-6 border-b-2 items-center'>

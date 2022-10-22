@@ -39,7 +39,7 @@ const Clock = ({ isTiming, setIsTiming, timeFunc, timeSettings }) => {
     } else {
       setTimer(timeSettings.long);
     }
-  }, [timeFunc, setTimer]);
+  }, [timeFunc, setTimer, timeSettings]);
 
   return (
     <div
