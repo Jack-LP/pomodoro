@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import useSound from 'use-sound';
+import alarmBird from '../assets/audio/alarm-bird.mp3';
+import alarmDigital from '../assets/audio/alarm-digital.mp3';
+import alarmWood from '../assets/audio/alarm-wood.mp3';
 import { convertTime } from '../utilities/convertTime';
 
-const Clock = ({ isTiming, setIsTiming, timeFunc, timeSettings }) => {
+const Clock = ({
+  isTiming,
+  setIsTiming,
+  timeFunc,
+  timeSettings,
+  soundSettings,
+}) => {
+  const [playBird] = useSound(alarmBird);
+  const [playDigital] = useSound(alarmDigital);
+  const [playWood] = useSound(alarmWood);
+
   let defaultTimer;
   if (timeFunc === 'pomodoro') {
     defaultTimer = timeSettings.pomodoro;
@@ -17,6 +31,13 @@ const Clock = ({ isTiming, setIsTiming, timeFunc, timeSettings }) => {
     if (!timer) {
       setTimer(defaultTimer + 1);
       setIsTiming(false);
+      soundSettings === 'alarmBird'
+        ? playBird()
+        : soundSettings === 'alarmDigital'
+        ? playDigital()
+        : soundSettings === 'alarmWood'
+        ? playWood()
+        : null;
     }
     setTimer((prev) => prev - 1);
   };

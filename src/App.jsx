@@ -22,12 +22,16 @@ const App = () => {
   const [colorSettings, setColorSettings] = useState(
     localStorage.getItem('colorSettings') || 'bg-fire'
   );
+  const [soundSettings, setSoundSettings] = useState(
+    localStorage.getItem('soundSettings') || 'mute'
+  );
 
   useEffect(() => {
     localStorage.setItem('timeSettings', JSON.stringify(timeSettings));
     localStorage.setItem('fontSettings', fontSettings);
     localStorage.setItem('colorSettings', colorSettings);
-  }, [fontSettings, colorSettings, timeSettings]);
+    localStorage.setItem('soundSettings', soundSettings);
+  }, [fontSettings, colorSettings, timeSettings, soundSettings]);
 
   return (
     <div
@@ -44,6 +48,7 @@ const App = () => {
         setIsTiming={setIsTiming}
         timeFunc={timeFunc}
         timeSettings={timeSettings}
+        soundSettings={soundSettings}
       />
       <SettingsModal
         timeSettings={timeSettings}
@@ -52,6 +57,8 @@ const App = () => {
         setFontSettings={setFontSettings}
         colorSettings={colorSettings}
         setColorSettings={setColorSettings}
+        soundSettings={soundSettings}
+        setSoundSettings={setSoundSettings}
       />
     </div>
   );

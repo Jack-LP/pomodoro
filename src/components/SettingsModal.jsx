@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Cog6ToothIcon, XMarkIcon, CheckIcon } from '@heroicons/react/24/solid';
+import {
+  Gear,
+  Cross,
+  Check,
+  MusicNote,
+  Alarm,
+  Leaf,
+  SoundOff,
+} from 'akar-icons';
 
 const SettingsModal = ({
   timeSettings,
@@ -8,6 +16,8 @@ const SettingsModal = ({
   setFontSettings,
   colorSettings,
   setColorSettings,
+  soundSettings,
+  setSoundSettings,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,6 +28,12 @@ const SettingsModal = ({
   ];
   const fontOptions = ['font-kumbh', 'font-roboto', 'font-space'];
   const colorOptions = ['bg-fire', 'bg-ice', 'bg-grape'];
+  const soundOptions = [
+    { name: 'Mute', value: 'mute', icon: <SoundOff size={18} /> },
+    { name: 'Bird', value: 'alarmBird', icon: <MusicNote size={18} /> },
+    { name: 'Digital', value: 'alarmDigital', icon: <Alarm size={18} /> },
+    { name: 'Wood', value: 'alarmWood', icon: <Leaf size={18} /> },
+  ];
 
   const handleChange = (e, item) => {
     if (e.target.value > 60) {
@@ -46,7 +62,7 @@ const SettingsModal = ({
         onClick={() => setIsOpen((prev) => !prev)}
         className='absolute bottom-10 hover:rotate-45 duration-300 ease-in-out'
       >
-        <Cog6ToothIcon className='h-8 w-8 text-slate' />
+        <Gear size={32} style={{ color: '#d8e1ff' }} />
       </button>
       <div
         onClick={() => setIsOpen(false)}
@@ -61,7 +77,7 @@ const SettingsModal = ({
           <div className='flex justify-between items-center border-b-2 pb-4'>
             <h2 className='font-bold text-2xl'>Settings</h2>
             <button onClick={() => setIsOpen(false)}>
-              <XMarkIcon className='h-6 w-6 text-midnight/50' />
+              <Cross size={20} style={{ color: '#141a3150' }} />
             </button>
           </div>
           <div className='flex flex-col items-center gap-4 pb-6 border-b-2'>
@@ -110,7 +126,7 @@ const SettingsModal = ({
               ))}
             </div>
           </div>
-          <div className='flex flex-col md:flex-row gap-4 justify-between pb-6 items-center'>
+          <div className='flex flex-col md:flex-row gap-4 justify-between pb-6 border-b-2 items-center'>
             <h3 className='font-semibold text-sm uppercase tracking-widest'>
               Color
             </h3>
@@ -121,9 +137,27 @@ const SettingsModal = ({
                   onClick={() => setColorSettings(item)}
                   className={`w-8 h-8 rounded-full flex items-center justify-center ${item}`}
                 >
-                  {colorSettings === item ? (
-                    <CheckIcon className='w-5 h-5' />
-                  ) : null}
+                  {colorSettings === item ? <Check size={18} /> : null}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className='flex flex-col md:flex-row gap-4 justify-between pb-6 items-center'>
+            <h3 className='font-semibold text-sm uppercase tracking-widest'>
+              Sound
+            </h3>
+            <div className='flex gap-4'>
+              {soundOptions.map((item) => (
+                <button
+                  key={item}
+                  onClick={() => setSoundSettings(item.value)}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    soundSettings === item.value
+                      ? 'bg-midnight text-chalk'
+                      : 'bg-chalk'
+                  }`}
+                >
+                  {item.icon}
                 </button>
               ))}
             </div>
