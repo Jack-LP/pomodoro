@@ -20,19 +20,18 @@ const SettingsModal = ({
   const colorOptions = ['bg-fire', 'bg-ice', 'bg-grape'];
 
   const handleChange = (e, item) => {
-    console.log(e);
-    if (e.target.value < 1) {
-      setTimeSettings((prev) => ({
-        ...prev,
-        [item]: 1 * 60,
-      }));
-      e.target.value = 1;
-    } else if (e.target.value > 60) {
+    if (e.target.value > 60) {
       setTimeSettings((prev) => ({
         ...prev,
         [item]: 60 * 60,
       }));
       e.target.value = 60;
+    } else if (e.target.value <= 0) {
+      setTimeSettings((prev) => ({
+        ...prev,
+        [item]: e.target.value >= 0 ? e.target.value * 60 : 1 * 60,
+      }));
+      e.target.value = '';
     } else {
       setTimeSettings((prev) => ({
         ...prev,
